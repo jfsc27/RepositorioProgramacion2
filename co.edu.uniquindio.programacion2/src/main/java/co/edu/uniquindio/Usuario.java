@@ -3,11 +3,13 @@ package co.edu.uniquindio;
 public class Usuario {
     public String nombre;
     public String edad;
+    public Double peso;
     public Transporte vehiculoAsociado;
 
-    public Usuario(String nombre, String edad, Transporte vehiculoAsociado) {
+    public Usuario(String nombre, String edad,double peso, Transporte vehiculoAsociado) {
         this.nombre = nombre;
         this.edad = edad;
+        this.peso = peso;
         this.vehiculoAsociado = vehiculoAsociado;
     }
 
@@ -27,6 +29,12 @@ public class Usuario {
         this.edad = edad;
     }
 
+    public Double getPeso() {
+        return peso;
+    }
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
     public Transporte getVehiculoAsociado() {
         return vehiculoAsociado;
     }

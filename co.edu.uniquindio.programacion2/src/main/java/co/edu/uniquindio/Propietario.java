@@ -13,11 +13,12 @@ public class Propietario {
     public Vehiculo vehiculoAsociado;
     public Collection<Vehiculo> listaVehiculosAsociado;
 
-    public Propietario(String nombre, String cedula, String email, String celular, Vehiculo vehiculoAsociado) {
+    public Propietario(String nombre, String cedula, String email, String celular, int edad, Vehiculo vehiculoAsociado) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.email = email;
         this.celular = celular;
+        this.edad = edad;
         this.vehiculoAsociado = vehiculoAsociado;
         this.listaVehiculosAsociado = new LinkedList<>();
     }
@@ -63,4 +64,11 @@ public class Propietario {
         this.vehiculoAsociado = vehiculoAsociado;
     }
 
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
 }
