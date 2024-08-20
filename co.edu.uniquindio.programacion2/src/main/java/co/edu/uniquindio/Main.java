@@ -1,8 +1,5 @@
 package co.edu.uniquindio;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
 import javax.swing.*;
 
 public class Main {
@@ -17,7 +14,7 @@ public class Main {
         empresa = new Empresa("Transporte Uniquindio");
 
         // Crear propietario de ejemplo
-        Propietario propietarioX = new Propietario("Juan", "123456789", "juan@mail.com", "3002727277", null);
+        co.edu.uniquindio.Propietario propietarioX = new co.edu.uniquindio.Propietario("Juan", "123456789", "juan@mail.com", "3002727277", null);
         empresa.añadirPropietario(propietarioX);
 
         // Crear vehículos de carga
@@ -51,7 +48,7 @@ public class Main {
             String celularPropietario = JOptionPane.showInputDialog("Ingrese el celular del propietario " + (i + 1) + ":");
 
             // Crear el objeto Propietario
-            Propietario propietario = new Propietario(nombrePropietario, cedulaPropietario, emailPropietario, celularPropietario, null);
+            co.edu.uniquindio.Propietario propietario = new co.edu.uniquindio.Propietario(nombrePropietario, cedulaPropietario, emailPropietario, celularPropietario, null);
             empresa.añadirPropietario(propietario);
         }
 
@@ -64,7 +61,7 @@ public class Main {
             String nombrePropietario = JOptionPane.showInputDialog("Ingrese el nombre del propietario asociado del transporte " + (i + 1) + ":");
 
             // Encontrar propietario
-            Propietario propietarioAsociado = empresa.getListaPropietarios().stream()
+            co.edu.uniquindio.Propietario propietarioAsociado = empresa.getListaPropietarios().stream()
                     .filter(p -> p.getNombre().equals(nombrePropietario))
                     .findFirst()
                     .orElse(null);
@@ -106,7 +103,7 @@ public class Main {
         // Crear vehículos de carga adicionales
         for (int i = 0; i < 1; i++) { // Crear 2 vehículos de carga como ejemplo
             String nombrePropietarioCarga = JOptionPane.showInputDialog("Ingrese el nombre del propietario para el vehículo de carga " + (i + 1) + ":");
-            Propietario propietarioParaCarga = empresa.getListaPropietarios().stream()
+            co.edu.uniquindio.Propietario propietarioParaCarga = empresa.getListaPropietarios().stream()
                     .filter(p -> p.getNombre().equals(nombrePropietarioCarga))
                     .findFirst()
                     .orElse(null);
@@ -171,87 +168,20 @@ public class Main {
 
         if (transporte != null) {
             int cantidadPasajeros = transporte.getListaUsuariosAsociados().size();
-            infoPasajeros.append("Placa: ").append(transporte.getPlaca())
-                    .append(", Pasajeros Transportados: ").append(cantidadPasajeros)
-                    .append("\n");
+            JOptionPane.showMessageDialog(null, "Número de pasajeros transportados por el vehículo con placa " + placa + ": " + cantidadPasajeros);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró un vehículo con la placa " + placa);
         }
-        JOptionPane.showMessageDialog(null, infoPasajeros.toString());
-
-        // Mostrar datos de la empresa (solo como ejemplo)
-        String mensaje = "Empresa: " + empresa.getNombre() +
-                "\nPropietarios: " + empresa.getListaPropietarios().size() +
-                "\nTransportes: " + empresa.getListaVehiculosTransporte().size() +
-                "\nUsuarios: " + empresa.getListaUsuarios().size() +
-                "\nCargas: " + empresa.getListaVehiculosCarga().size();
-        JOptionPane.showMessageDialog(null, mensaje);
-    }
-        Collection<Propietario> propietarios = new LinkedList<>();
-
-        // Solicita la información de los propietarios
-        int cantidadPropietarios = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de propietarios:"));{
-
-        for (int i = 0; i < cantidadPropietarios; i++) {
-            String nombre = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nNombre:");
-            String cedula = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nCédula:");
-            String email = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nEmail:");
-            String celular = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nCelular:");
-            int edad = Integer.parseInt(JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nEdad:"));
-
-            // Crea un objeto Propietario y agregarlo a la colección
-            Propietario propietario = new Propietario(nombre, cedula, email, celular, null, edad);
-            propietarios.add(propietario);
-        }
-
-        // Calcula el número de propietarios mayores de 40 años
-        int mayoresDe40 = 0;
-        for (Propietario propietario : propietarios) {
-            if (propietario.getEdad() > 40) {
-                mayoresDe40++;
-            }
-        }
-
-        // Mostrar el resultado
-        JOptionPane.showMessageDialog(null, "Propietarios mayores de 40 años: " + mayoresDe40);
     }
 
-    Collection <Usuario> usuarios= new LinkedLis<>();
+    private static void mostrarInformacionGeneral() {
+        StringBuilder info = new StringBuilder("Información de la empresa:\n");
+        info.append("Nombre de la empresa: ").append(empresa.getNombre()).append("\n");
+        info.append("Número de propietarios: ").append(empresa.getListaPropietarios().size()).append("\n");
+        info.append("Número de vehículos de transporte: ").append(empresa.getListaVehiculosTransporte().size()).append("\n");
+        info.append("Número de vehículos de carga: ").append(empresa.getListaVehiculosCarga().size()).append("\n");
+        info.append("Número de usuarios: ").append(empresa.getListaUsuarios().size()).append("\n");
 
-// solicitar cantidad de usuarios
-    int cantidadUsuarios = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de usuarios:"));{
-
-    for (int i = 0; i < cantidadUsuarios; i++){
-        String nombre = JOptionPane.showInputDialog("Usuario " + (i + 1) + "\nNombre:");
-        String edad = JOptionPane.showInputDialog(" Usuario" + (i + 1) + "\nEdad:");
-        String vehiculoAsociado = JOptionPane.showInputDialog("Usuario " + (i + 1) + "\nVehiculoAsociado:");   
-
-
-              // Crear un objeto usuario y agregarlo a la colección
-              Usuario usuario = new Usuario(nombre, edad, null);
-          }
-
-        // Pedir los valores de edad al usuario
-        int edadMinima = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la edad mínima:"));
-        int edadMaxima = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la edad máxima:"));
-
-        // Contador para almacenar la cantidad de usuarios en el rango
-        int usuariosEnRango = 0;
-
-        // Verificar si cada usuario está en el rango
-        if (Integer.parseInt(usuario1.getEdad()) >= edadMinima && Integer.parseInt(usuario1.getEdad()) <= edadMaxima) {
-            usuariosEnRango++;
-        }
-        if (Integer.parseInt(usuario2.getEdad()) >= edadMinima && Integer.parseInt(usuario2.getEdad()) <= edadMaxima) {
-            usuariosEnRango++;
-        }
-        if (Integer.parseInt(usuario3.getEdad()) >= edadMinima && Integer.parseInt(usuario3.getEdad()) <= edadMaxima) {
-            usuariosEnRango++;
-        }
-        // ... Verifica los demás usuarios ...
-
-        // Mostrar el resultado
-        JOptionPane.showMessageDialog(null, "Usuarios en el rango de edad: " + usuariosEnRango);
+        JOptionPane.showMessageDialog(null, info.toString());
     }
-     }
-
-    
-
+}
