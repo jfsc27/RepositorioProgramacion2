@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class MainTransporte {
 
-    private static Empresa empresa = new Empresa("Transporte Ejemplo");
+    private static Empresa empresa = new Empresa("Transporte UQ");
 
     public static void main(String[] args) {
         // Mostrar el menú principal
@@ -77,11 +77,11 @@ public class MainTransporte {
                     contarUsuariosPorRangoDeEdad();
                     break;
                 case 5:
-                    JOptionPane.showMessageDialog(null, "Saliendo...");
+                    JOptionPane.showMessageDialog(null, "Despegandola...");
                     System.exit(0);
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Opción no válida.");
+                    JOptionPane.showMessageDialog(null, "No papa, tas equivocao. Opción no valida");
             }
         }
     }
@@ -89,27 +89,27 @@ public class MainTransporte {
     private static void inicializarDatos() {
         // Crear y agregar propietarios
         LinkedList<Propietario> propietarios = new LinkedList<>();
-        propietarios.add(new Propietario("Juan Pérez", "123456789", "juan.perez@ejemplo.com", "3001234567", 45, null));
-        propietarios.add(new Propietario("Ana Gómez", "987654321", "ana.gomez@ejemplo.com", "3009876543", 50, null));
+        propietarios.add(new Propietario("Juan Smith", "1099268426", "juan.smith@ejemplo.com", "3103396739", 45, null));
+        propietarios.add(new Propietario("Yulieth", "987654321", "yulieth@ejemplo.com", "3009369843", 50, null));
 
         // Crear y agregar vehículos de carga
         LinkedList<Carga> vehiculosCarga = new LinkedList<>();
-        vehiculosCarga.add(new Carga("C1", "ModeloC1", "MarcaC1", "Rojo", propietarios.get(0), 2000.0, 4));
-        vehiculosCarga.add(new Carga("C2", "ModeloC2", "MarcaC2", "Azul", propietarios.get(1), 3000.0, 6));
+        vehiculosCarga.add(new Carga("AAA111", "2020", "Marcopolo", "Vinotinto", propietarios.get(0), 200.0, 4));
+        vehiculosCarga.add(new Carga("BBB222", "2020", "Mercedez", "Azul", propietarios.get(1), 300.0, 6));
 
         // Crear y agregar vehículos de transporte
         LinkedList<Transporte> vehiculosTransporte = new LinkedList<>();
-        vehiculosTransporte.add(new Transporte("T1", "ModeloT1", "MarcaT1", "Verde", null, 20));
-        vehiculosTransporte.add(new Transporte("T2", "ModeloT2", "MarcaT2", "Amarillo", null, 25));
-        vehiculosTransporte.add(new Transporte("T3", "ModeloT3", "MarcaT3", "Blanco", null, 30));
+        vehiculosTransporte.add(new Transporte("CCC333", "2010", "Marcopolo", "Verde", propietarios.get(0), 20));
+        vehiculosTransporte.add(new Transporte("DDD444", "1999", "Marcopolo", "Amarillo", propietarios.get(0), 25));
+        vehiculosTransporte.add(new Transporte("EEE555", "1789", "Marcopolo", "Blanco", propietarios.get(1), 30));
 
         // Crear y agregar usuarios
         LinkedList<Usuario> usuarios = new LinkedList<>();
-        usuarios.add(new Usuario("Carlos Martínez", "30", 70.0, vehiculosTransporte.get(0)));
-        usuarios.add(new Usuario("Laura Ruiz", "40", 80.0, vehiculosTransporte.get(1)));
-        usuarios.add(new Usuario("Pedro López", "35", 90.0, vehiculosTransporte.get(2)));
-        usuarios.add(new Usuario("Marta Fernández", "25", 60.0, vehiculosTransporte.get(0)));
-        usuarios.add(new Usuario("Sofía Morales", "28", 65.0, vehiculosTransporte.get(1)));
+        usuarios.add(new Usuario("Lisandro Martínez", "30", 70.0, vehiculosTransporte.get(0)));
+        usuarios.add(new Usuario("Diomedes Díaz", "40", 80.0, vehiculosTransporte.get(1)));
+        usuarios.add(new Usuario("Pedro Perales", "35", 90.0, vehiculosTransporte.get(2)));
+        usuarios.add(new Usuario("Tatiana Torres", "25", 60.0, vehiculosTransporte.get(0)));
+        usuarios.add(new Usuario("Sofía Smith", "28", 65.0, vehiculosTransporte.get(1)));
 
         // Asignar vehículos a propietarios
         for (int i = 0; i < propietarios.size(); i++) {
