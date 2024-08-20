@@ -63,5 +63,4 @@ public class Propietario {
         this.vehiculoAsociado = vehiculoAsociado;
     }
 
-
 }
