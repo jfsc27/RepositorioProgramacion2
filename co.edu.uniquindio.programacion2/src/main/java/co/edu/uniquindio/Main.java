@@ -110,7 +110,7 @@ public class Main {
         }
         JOptionPane.showMessageDialog(null, infoPasajeros.toString());
 
-        // Mostrar datos de la empresa (solo como ejemplo)
+        // Mostrar datos de la empresa 
         String mensaje = "Empresa: " + empresa.getNombre() +
                 "\nPropietarios: " + empresa.getListaPropietarios().size() +
                 "\nTransportes: " + empresa.getListaVehiculosTransporte().size() +
@@ -120,7 +120,7 @@ public class Main {
     }
         Collection<Propietario> propietarios = new LinkedList<>();
 
-        // Solicitar información sobre los propietarios
+        // Solicita la información de los propietarios
         int cantidadPropietarios = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de propietarios:"));{
 
         for (int i = 0; i < cantidadPropietarios; i++) {
@@ -130,12 +130,12 @@ public class Main {
             String celular = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nCelular:");
             int edad = Integer.parseInt(JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nEdad:"));
 
-            // Crear un objeto Propietario y agregarlo a la colección
+            // Crea un objeto Propietario y agregarlo a la colección
             Propietario propietario = new Propietario(nombre, cedula, email, celular, null, edad);
             propietarios.add(propietario);
         }
 
-        // Calcular el número de propietarios mayores de 40 años
+        // Calcula el número de propietarios mayores de 40 años
         int mayoresDe40 = 0;
         for (Propietario propietario : propietarios) {
             if (propietario.getEdad() > 40) {
@@ -146,6 +146,45 @@ public class Main {
         // Mostrar el resultado
         JOptionPane.showMessageDialog(null, "Propietarios mayores de 40 años: " + mayoresDe40);
     }
-}
 
+    Collection <Usuario> usuarios= new LinkedLis<>();
+
+// solicitar cantidad de usuarios
+    int cantidadUsuarios = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de usuarios:"));{
+
+    for (int i = 0; i < cantidadUsuarios; i++){
+        String nombre = JOptionPane.showInputDialog("Usuario " + (i + 1) + "\nNombre:");
+        String edad = JOptionPane.showInputDialog(" Usuario" + (i + 1) + "\nEdad:");
+        String vehiculoAsociado = JOptionPane.showInputDialog("Usuario " + (i + 1) + "\nVehiculoAsociado:");   
+
+
+              // Crear un objeto usuario y agregarlo a la colección
+              Usuario usuario = new Usuario(nombre, edad, null);
+          }
+
+        // Pedir los valores de edad al usuario
+        int edadMinima = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la edad mínima:"));
+        int edadMaxima = Integer.parseInt(JOptionPane.showInputDialog("Ingresa la edad máxima:"));
+
+        // Contador para almacenar la cantidad de usuarios en el rango
+        int usuariosEnRango = 0;
+
+        // Verificar si cada usuario está en el rango
+        if (Integer.parseInt(usuario1.getEdad()) >= edadMinima && Integer.parseInt(usuario1.getEdad()) <= edadMaxima) {
+            usuariosEnRango++;
+        }
+        if (Integer.parseInt(usuario2.getEdad()) >= edadMinima && Integer.parseInt(usuario2.getEdad()) <= edadMaxima) {
+            usuariosEnRango++;
+        }
+        if (Integer.parseInt(usuario3.getEdad()) >= edadMinima && Integer.parseInt(usuario3.getEdad()) <= edadMaxima) {
+            usuariosEnRango++;
+        }
+        // ... Verifica los demás usuarios ...
+
+        // Mostrar el resultado
+        JOptionPane.showMessageDialog(null, "Usuarios en el rango de edad: " + usuariosEnRango);
+    }
+     }
+
+    
 
