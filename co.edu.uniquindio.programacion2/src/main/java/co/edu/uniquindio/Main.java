@@ -1,5 +1,8 @@
 package co.edu.uniquindio;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import javax.swing.*;
 
 public class Main {
@@ -115,4 +118,34 @@ public class Main {
                 "\nCargas: " + empresa.getListaVehiculosCarga().size();
         JOptionPane.showMessageDialog(null, mensaje);
     }
+        Collection<Propietario> propietarios = new LinkedList<>();
+
+        // Solicitar información sobre los propietarios
+        int cantidadPropietarios = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de propietarios:"));{
+
+        for (int i = 0; i < cantidadPropietarios; i++) {
+            String nombre = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nNombre:");
+            String cedula = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nCédula:");
+            String email = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nEmail:");
+            String celular = JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nCelular:");
+            int edad = Integer.parseInt(JOptionPane.showInputDialog("Propietario " + (i + 1) + "\nEdad:"));
+
+            // Crear un objeto Propietario y agregarlo a la colección
+            Propietario propietario = new Propietario(nombre, cedula, email, celular, null, edad);
+            propietarios.add(propietario);
+        }
+
+        // Calcular el número de propietarios mayores de 40 años
+        int mayoresDe40 = 0;
+        for (Propietario propietario : propietarios) {
+            if (propietario.getEdad() > 40) {
+                mayoresDe40++;
+            }
+        }
+
+        // Mostrar el resultado
+        JOptionPane.showMessageDialog(null, "Propietarios mayores de 40 años: " + mayoresDe40);
+    }
 }
+
+
