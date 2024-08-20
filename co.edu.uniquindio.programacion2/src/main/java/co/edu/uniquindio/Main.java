@@ -6,18 +6,45 @@ import java.util.LinkedList;
 import javax.swing.*;
 
 public class Main {
+    private static Empresa empresa;
+
     public static void main(String[] args) {
         inicializarDatosPrueba();
+        mostrarMenu();
     }
 
     private static void inicializarDatosPrueba() {
+        empresa = new Empresa("Transporte Uniquindio");
 
-        // Crear la empresa
-        String nombreEmpresa = JOptionPane.showInputDialog("Ingrese el nombre de la empresa:");
-        Empresa empresa = new Empresa(nombreEmpresa);
+        // Crear propietario de ejemplo
+        Propietario propietarioX = new Propietario("Juan", "123456789", "juan@mail.com", "3002727277", null);
+        empresa.añadirPropietario(propietarioX);
 
-        // Crear propietarios
-        for (int i = 0; i < 2; i++) {
+        // Crear vehículos de carga
+        Carga vehiculoCarga1X = new Carga("JUJ427", "2020", "AWM", "Azul", propietarioX, 100.0, 4);
+        Carga vehiculoCarga2X = new Carga("GTL720", "2021", "Nissan", "Blanco", propietarioX, 150.0, 6);
+        empresa.añadirCarga(vehiculoCarga1X);
+        empresa.añadirCarga(vehiculoCarga2X);
+
+        // Crear vehículos de transporte y asociar usuarios
+        Transporte vehiculoTransporte1X = new Transporte("SDL100", "2019", "Suzuki", "Blanco", propietarioX, 20);
+        Transporte vehiculoTransporte2X = new Transporte("AAA000", "2010", "Marcopolo", "Negro", propietarioX, 22);
+        empresa.añadirTransporte(vehiculoTransporte1X);
+        empresa.añadirTransporte(vehiculoTransporte2X);
+
+        // Crear y asociar usuarios a los vehículos de transporte
+        Usuario usuario1 = new Usuario("Yulieth Guitierrez", "00", vehiculoTransporte1X);
+        Usuario usuario2 = new Usuario("Yesenia Sofia", "25", vehiculoTransporte1X);
+        vehiculoTransporte1X.getListaUsuariosAsociados().add(usuario1);
+        vehiculoTransporte1X.getListaUsuariosAsociados().add(usuario2);
+
+        Usuario usuario3X = new Usuario("Juan Smith", "48", vehiculoTransporte2X);
+        Usuario usuario4X = new Usuario("Josefina María", "32", vehiculoTransporte2X);
+        vehiculoTransporte2X.getListaUsuariosAsociados().add(usuario3X);
+        vehiculoTransporte2X.getListaUsuariosAsociados().add(usuario4X);
+
+        // Crear propietarios adicionales
+        for (int i = 0; i < 1; i++) {
             String nombrePropietario = JOptionPane.showInputDialog("Ingrese el nombre del propietario " + (i + 1) + ":");
             String cedulaPropietario = JOptionPane.showInputDialog("Ingrese la cédula del propietario " + (i + 1) + ":");
             String emailPropietario = JOptionPane.showInputDialog("Ingrese el email del propietario " + (i + 1) + ":");
@@ -28,7 +55,7 @@ public class Main {
             empresa.añadirPropietario(propietario);
         }
 
-        // Crear transportes
+        // Crear transportes adicionales
         for (int i = 0; i < 1; i++) {
             String placaTransporte = JOptionPane.showInputDialog("Ingrese la placa del transporte " + (i + 1) + ":");
             String modeloTransporte = JOptionPane.showInputDialog("Ingrese el modelo del transporte " + (i + 1) + ":");
@@ -48,13 +75,13 @@ public class Main {
 
             int maxPasajeros = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el número máximo de pasajeros del transporte " + (i + 1) + ":"));
 
-            // Crear el objeto transporte
+            // Crear el objeto Transporte
             Transporte transporte = new Transporte(placaTransporte, modeloTransporte, marcaTransporte, colorTransporte, propietarioAsociado, maxPasajeros);
             empresa.añadirTransporte(transporte);
         }
 
-        // Crear usuarios
-        for (int i = 0; i < 2; i++) { // Crear 2 usuarios como ejemplo
+        // Crear usuarios adicionales
+        for (int i = 0; i < 1; i++) { // Crear 2 usuarios como ejemplo
             String nombreUsuario = JOptionPane.showInputDialog("Ingrese el nombre del usuario " + (i + 1) + ":");
             String edadUsuario = JOptionPane.showInputDialog("Ingrese la edad del usuario " + (i + 1) + ":");
             String placaTransporteAsociado = JOptionPane.showInputDialog("Ingrese la placa del transporte asociado al usuario " + (i + 1) + ":");
@@ -76,7 +103,7 @@ public class Main {
             transporteAsociado.getListaUsuariosAsociados().add(usuario);
         }
 
-        // Crear vehículos de carga
+        // Crear vehículos de carga adicionales
         for (int i = 0; i < 1; i++) { // Crear 2 vehículos de carga como ejemplo
             String nombrePropietarioCarga = JOptionPane.showInputDialog("Ingrese el nombre del propietario para el vehículo de carga " + (i + 1) + ":");
             Propietario propietarioParaCarga = empresa.getListaPropietarios().stream()
@@ -99,10 +126,50 @@ public class Main {
             Carga carga = new Carga(placaCarga, modeloCarga, marcaCarga, colorCarga, propietarioParaCarga, capacidadCarga, numeroEjes);
             empresa.añadirCarga(carga);
         }
+    }
 
-        // Calcular y mostrar el número de pasajeros transportados
-        StringBuilder infoPasajeros = new StringBuilder("Número de pasajeros transportados por vehículo:\n");
-        for (Transporte transporte : empresa.getListaVehiculosTransporte()) {
+    private static void mostrarMenu() {
+        String[] opciones = {"Buscar número de pasajeros según placa", "Mostrar información general", "Salir"};
+        int opcion;
+
+        do {
+            opcion = JOptionPane.showOptionDialog(
+                    null,
+                    "Seleccione una opción",
+                    "Menú Principal",
+                    JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE,
+                    null,
+                    opciones,
+                    opciones[0]
+
+            );
+
+            switch (opcion) {
+                case 0:
+                    buscarPasajerosPorPlaca();
+                    break;
+                case 1:
+                    mostrarInformacionGeneral();
+                    break;
+                case 2:
+                    JOptionPane.showMessageDialog(null, "Saliendo del sistema.");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción no válida.");
+                    break;
+            }
+        } while (opcion != 2);
+    }
+
+    private static void buscarPasajerosPorPlaca() {
+        String placa = JOptionPane.showInputDialog("Ingrese la placa del vehículo:");
+        Transporte transporte = empresa.getListaVehiculosTransporte().stream()
+                .filter(t -> t.getPlaca().equals(placa))
+                .findFirst()
+                .orElse(null);
+
+        if (transporte != null) {
             int cantidadPasajeros = transporte.getListaUsuariosAsociados().size();
             infoPasajeros.append("Placa: ").append(transporte.getPlaca())
                     .append(", Pasajeros Transportados: ").append(cantidadPasajeros)
@@ -110,7 +177,7 @@ public class Main {
         }
         JOptionPane.showMessageDialog(null, infoPasajeros.toString());
 
-        // Mostrar datos de la empresa 
+        // Mostrar datos de la empresa (solo como ejemplo)
         String mensaje = "Empresa: " + empresa.getNombre() +
                 "\nPropietarios: " + empresa.getListaPropietarios().size() +
                 "\nTransportes: " + empresa.getListaVehiculosTransporte().size() +
