@@ -3,7 +3,6 @@ package co.edu.uniquindio;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,6 +10,9 @@ import java.awt.Font;
 import java.util.LinkedList;
 import java.util.stream.Collectors;
 
+/**
+ * Clase Main que gestiona el sistema de transporte.
+ */
 public class MainTransporte {
 
     private static Empresa empresa = new Empresa("Transporte UQ");
@@ -20,6 +22,9 @@ public class MainTransporte {
         mostrarMenu();
     }
 
+    /**
+     * Muestra el menú principal con opciones para el usuario.
+     */
     private static void mostrarMenu() {
         while (true) {
             // Crear el panel personalizado con la imagen de fondo
@@ -28,7 +33,7 @@ public class MainTransporte {
                 protected void paintComponent(Graphics g) {
                     super.paintComponent(g);
                     // Cargar la imagen de fondo
-                    ImageIcon icon = new ImageIcon("ruta/a/tu/imagen/fondo.jpg"); // Asegúrate de ajustar la ruta
+                    ImageIcon icon = new ImageIcon("ruta/a/tu/imagen/fondo.jpg"); // Ajusta la ruta de la imagen
                     Image img = icon.getImage();
                     g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
 
@@ -60,6 +65,7 @@ public class MainTransporte {
                     opciones,
                     opciones[0]);
 
+            // Manejar la opción seleccionada
             switch (opcion) {
                 case 0:
                     inicializarDatos();
@@ -81,11 +87,14 @@ public class MainTransporte {
                     System.exit(0);
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "No papa, tas equivocao. Opción no valida");
+                    JOptionPane.showMessageDialog(null, "Opción no válida");
             }
         }
     }
 
+    /**
+     * Inicializa datos de prueba para propietarios, vehículos y usuarios.
+     */
     private static void inicializarDatos() {
         // Crear y agregar propietarios
         LinkedList<Propietario> propietarios = new LinkedList<>();
@@ -134,6 +143,9 @@ public class MainTransporte {
         JOptionPane.showMessageDialog(null, "Datos inicializados con éxito!");
     }
 
+    /**
+     * Captura el total de pasajeros transportados por los primeros tres vehículos de transporte.
+     */
     private static void capturarTotalPasajeros() {
         LinkedList<Transporte> vehiculosTransporte = empresa.getListaVehiculosTransporte().stream().limit(3).collect(Collectors.toCollection(LinkedList::new));
 
@@ -151,6 +163,9 @@ public class MainTransporte {
         JOptionPane.showMessageDialog(null, "Total de pasajeros transportados en un día: " + totalPasajeros);
     }
 
+    /**
+     * Obtiene y muestra los usuarios cuyo peso es mayor al valor ingresado.
+     */
     private static void obtenerUsuariosPorPeso() {
         double peso = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de peso para filtrar usuarios:"));
 
@@ -171,6 +186,9 @@ public class MainTransporte {
         JOptionPane.showMessageDialog(null, mensaje.toString());
     }
 
+    /**
+     * Cuenta y muestra el número de propietarios mayores de 40 años.
+     */
     private static void contarPropietariosMayoresDe40() {
         long count = empresa.getListaPropietarios().stream()
                 .filter(propietario -> propietario.getEdad() > 40)
@@ -179,6 +197,9 @@ public class MainTransporte {
         JOptionPane.showMessageDialog(null, "Número de propietarios mayores de 40 años: " + count);
     }
 
+    /**
+     * Cuenta y muestra el número de usuarios en un rango de edad especificado.
+     */
     private static void contarUsuariosPorRangoDeEdad() {
         int edadMin = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la edad mínima:"));
         int edadMax = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la edad máxima:"));
